@@ -1,0 +1,26 @@
+{
+    "name": "bvgz-vscode",
+    "displayName": "bvgz-vscode",
+    "description": "",
+    "version": "0.0.1",
+    "publisher": "mataron",
+    "engines": {
+        "vscode": "^1.17.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "bvgz",
+            "aliases": ["bvgz", "bvgz"],
+            "extensions": [".bvgzs"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "bvgz",
+            "scopeName": "source.bvgz",
+            "path": "./syntaxes/bvgz.tmLanguage.json"
+        }]
+    }
+}

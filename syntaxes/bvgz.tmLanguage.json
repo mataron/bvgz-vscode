@@ -1,0 +1,149 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "bvgz",
+	"patterns": [
+		{
+			"include": "#mnemonics"
+		},
+		{
+			"include": "#labels"
+		},
+		{
+			"include": "#consts"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#preprocessor"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [{
+				"name": "comment.line.bvgz",
+				"match": ";.*$"
+			}]
+		},
+		"preprocessor": {
+			"patterns": [{
+				"name": "storage.modifier.preprocessor.directive.bvgz",
+				"match": "^\\s*%(data|include)\\b"
+			}, {
+				"match": ":[0-9]+\\b",
+				"name": "entity.name.function.data.offset.bvgz"
+			}, {
+				"match": "/[0-9]+\\b",
+				"name": "entity.name.function.data.size.bvgz"
+			}]
+		},
+		"consts": {
+			"patterns": [{
+				"name": "constant.character.escape.pointer.deref.bvgz",
+				"match": "\\s\\*0x[0-9a-zA-Z]+\\b"
+			}, {
+				"name": "constant.character.escape.pointer.deref.bvgz",
+				"match": "\\s\\*[0-9]+\\b"
+			}, {
+				"begin": "\\b(0x[0-9a-zA-Z]+)",
+				"end": "\\b",
+				"captures": {
+					"1": {
+						"name": "constant.numeric.hex.bvgz"
+					}
+				}
+			}, {
+				"begin": "\\b([0-9]+)",
+				"end": "\\b",
+				"captures": {
+					"1": {
+						"name": "constant.numeric.dec.bvgz"
+					}
+				}
+			}]
+		},
+		"labels": {
+			"patterns": [{
+				"name": "entity.name.class.code.label.bvgz",
+				"match": "^\\s*([^\\s]+\\s*):"
+			}, {
+				"match": "@[a-zA-Z_][a-zA-Z_0-9]+\\b",
+				"name": "entity.name.class.code.label.bvgz"
+			}]
+		},
+		"mnemonics-arith": {
+			"patterns": [{
+				"name": "keyword.mnemonic.arithmetic.bvgz",
+				"match": "\\b(add|sub|mul|div|mod)\\b"
+			}]
+		},
+		"mnemonics-rel": {
+			"patterns": [{
+				"name": "keyword.mnemonic.relational.bvgz",
+				"match": "\\b(eq|ne|gt|lt|ge|le)\\b"
+			}]
+		},
+		"mnemonics-logical": {
+			"patterns": [{
+				"name": "keyword.mnemonic.logical.bvgz",
+				"match": "\\b(l_and|l_or|l_not|l_bool)\\b"
+			}]
+		},
+		"mnemonics-binr": {
+			"patterns": [{
+				"name": "keyword.mnemonic.binary.bvgz",
+				"match": "\\b(and|or|not|xor|shl|shr)\\b"
+			}]
+		},
+		"mnemonics-mem": {
+			"patterns": [{
+				"name": "keyword.mnemonic.memory.bvgz",
+				"match": "\\b(cp|read8|read16|read32|read64|write8|write16|write32|write64)\\b"
+			}]
+		},
+		"mnemonics-ctrl": {
+			"patterns": [{
+				"name": "keyword.mnemonic.control.bvgz",
+				"match": "\\b(jmp|jtrue|jfalse|call|syscall|ret|argv|retv)\\b"
+			}]
+		},
+		"mnemonics-misc": {
+			"patterns": [{
+				"name": "keyword.mnemonic.misc.bvgz",
+				"match": "\\b(nop|assert)\\b"
+			}]
+		},
+		"mnemonics": {
+			"patterns": [{
+				"include": "#mnemonics-arith"
+			}, {
+				"include": "#mnemonics-logical"
+			}, {
+				"include": "#mnemonics-rel"
+			}, {
+				"include": "#mnemonics-binr"
+			}, {
+				"include": "#mnemonics-mem"
+			}, {
+				"include": "#mnemonics-ctrl"
+			}, {
+				"include": "#mnemonics-misc"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.bvgz",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.bvgz",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.bvgz"
+}
